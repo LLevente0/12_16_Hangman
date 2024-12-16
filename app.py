@@ -1,8 +1,20 @@
 from country_list import get_countries
+import random
 
 countries = get_countries()
 
 print("Üdvözöllek az akasztófa játékban!")
+
+orszag_index = random.randint(0, 182)
+orszag = countries[orszag_index]
+print(orszag)
+
+def easy():
+
+  tipp = input("Adj meg egy betűt! ")
+  if tipp == orszag:
+      print("Gratulálok, nyertél!")
+
 
 def kezdes():
 
@@ -19,3 +31,5 @@ def kezdes():
             hard()
         else:
             print("Helytelen formátum! ❌")
+
+kezdes()
