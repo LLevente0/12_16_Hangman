@@ -5,7 +5,7 @@ countries = get_countries()
 
 print("Üdvözöllek az Akasztófa játékban!")
 
-orszag_index = random.randint(0, 182)  # 182 vagy 183?
+orszag_index = random.randint(0, 183)
 orszag = countries[orszag_index]
 orszag_len = len(orszag)
 ismeretlen = ""
@@ -35,30 +35,37 @@ def easy():
             print("Gratulálok, nyertél! 🏆")
             break
 
-        elif tipp.lower() in jo_tippek or rossz_tippek:
+        elif tipp.lower() in jo_tippek or tipp.lower() in rossz_tippek:
             print("Ezt a betűt már próbáltad! ❌")
 
         elif tipp == "quit":
             quit = input("- Kilépés -\nBiztos ki akarsz lépni? (igen/nem)")
 
             if quit == "igen":
+                print("Sikeres kilépés! 👋")
                 break
 
             elif quit == "nem":
+                print("Játék folytatása...")
                 continue
 
         elif tipp.lower() in orszag.lower():
             jo_tippek.append(tipp.lower())
             print(f"Helyes válasz! ✅\n> Rossz válaszok: {rossz_tippek} \n> Jó válaszok: {jo_tippek}")
-            # replace?
-            # megkeresni hol vannak azok a betűk, ott kicserélni pontosan, ha van többet is akár
-            print(ismeretlen)
+        helyes_tipp = " "
+        for i in range(len(orszag)):
+            if orszag[i] == tipp:
+                helyes_tipp += tipp + " "
+            else:
+                helyes_tipp += ismeretlen[i * 2] + " "
+        ismeretlen = helyes_tipp
+        print(ismeretlen)
 
         elif tipp.lower() not in orszag.lower():
-            rossz_tippek.append(tipp.lower())
-            life -= 1
-            print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
-            print("Megmaradt életed:", life, " 💔")
+        rossz_tippek.append(tipp.lower())
+        life -= 1
+        print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
+        print("Megmaradt életed:", life, " 💔")
 
 
 def kezdes():
@@ -78,5 +85,6 @@ def kezdes():
 
         else:
             print("Helytelen formátum! ❌")
+
 
 kezdes()
