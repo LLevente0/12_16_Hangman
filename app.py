@@ -22,6 +22,7 @@ for i in orszag:
 
 def easy():
     life = 7
+    ismeretlen = ""
 
     print(f"Az ország: {orszag}")
     print(f"Hossz: {orszag_len}")
@@ -52,20 +53,20 @@ def easy():
         elif tipp.lower() in orszag.lower():
             jo_tippek.append(tipp.lower())
             print(f"Helyes válasz! ✅\n> Rossz válaszok: {rossz_tippek} \n> Jó válaszok: {jo_tippek}")
-        helyes_tipp = " "
-        for i in range(len(orszag)):
-            if orszag[i] == tipp:
-                helyes_tipp += tipp + " "
-            else:
-                helyes_tipp += ismeretlen[i * 2] + " "
-        ismeretlen = helyes_tipp
-        print(ismeretlen)
+            helyes_tipp = " "
+            for i in range(len(orszag)):
+                if orszag[i] == tipp:
+                    helyes_tipp += tipp + " "
+                else:
+                    helyes_tipp += ismeretlen[i * 2] + " "
+            ismeretlen = helyes_tipp
+            print(ismeretlen)
 
         elif tipp.lower() not in orszag.lower():
-        rossz_tippek.append(tipp.lower())
-        life -= 1
-        print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
-        print("Megmaradt életed:", life, " 💔")
+            rossz_tippek.append(tipp.lower())
+            life -= 1
+            print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
+            print("Megmaradt életed:", life, " 💔")
 
 
 def kezdes():
