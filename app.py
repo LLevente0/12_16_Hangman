@@ -5,32 +5,30 @@ countries = get_countries()
 
 print("Üdvözöllek az Akasztófa játékban!")
 
-orszag_index = random.randint(0, 183)
+orszag_index = random.randint(0, len(countries) - 1)
 orszag = countries[orszag_index]
 orszag_len = len(orszag)
 ismeretlen = ""
-jo_tippek = []
-rossz_tippek = []
 
 for i in orszag:
-
     if i == " ":
         ismeretlen += "   "
     else:
         ismeretlen += "_ "
 
+jo_tippek = []
+rossz_tippek = []
+
 
 def easy():
     life = 7
-    ismeretlen = ""
+    global ismeretlen
 
-    print(f"Az ország: {orszag}")
-    print(f"Hossz: {orszag_len}")
+    print(f"Az ország hossza: {orszag_len} karakter.")
     print(f"A kitalálandó ország: \n{ismeretlen}")
 
     while life > 0:
-
-        tipp = input("Adj meg egy betűt, vagy megoldást: ")
+        tipp = input("Adj meg egy betűt, vagy megoldást: ").strip()
 
         if tipp.lower() == orszag.lower():
             print("Gratulálok, nyertél! 🏆")
@@ -39,53 +37,60 @@ def easy():
         elif tipp.lower() in jo_tippek or tipp.lower() in rossz_tippek:
             print("Ezt a betűt már próbáltad! ❌")
 
-        elif tipp == "quit":
-            quit = input("- Kilépés -\nBiztos ki akarsz lépni? (igen/nem)")
-
-            if quit == "igen":
+        elif tipp.lower() == "quit":
+            kilepes = input("- Kilépés -\nBiztos ki akarsz lépni? (igen/nem): ").strip().lower()
+            if kilepes == "igen":
                 print("Sikeres kilépés! 👋")
                 break
-
-            elif quit == "nem":
+            else:
                 print("Játék folytatása...")
                 continue
 
         elif tipp.lower() in orszag.lower():
             jo_tippek.append(tipp.lower())
             print(f"Helyes válasz! ✅\n> Rossz válaszok: {rossz_tippek} \n> Jó válaszok: {jo_tippek}")
-            helyes_tipp = " "
+
+            new_ismeretlen = ""
             for i in range(len(orszag)):
-                if orszag[i] == tipp:
-                    helyes_tipp += tipp + " "
+                if orszag[i].lower() == tipp.lower():
+                    new_ismeretlen += orszag[i] + " "
                 else:
-                    helyes_tipp += ismeretlen[i * 2] + " "
-            ismeretlen = helyes_tipp
+                    new_ismeretlen += ismeretlen[i * 2] + " "
+            ismeretlen = new_ismeretlen
             print(ismeretlen)
 
-        elif tipp.lower() not in orszag.lower():
+            if "_" not in ismeretlen:
+                print("Gratulálok, kitaláltad az országot! 🎉")
+                break
+
+        else:
             rossz_tippek.append(tipp.lower())
             life -= 1
             print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
             print("Megmaradt életed:", life, " 💔")
 
+            if life == 0:
+                print(f"Vesztettél! Az ország: {orszag}")
+
 
 def kezdes():
     while True:
-        jatek_valasztas = int(input("Válassz szintet!\nKönnyű (1)\nKözepes (2)\nNehéz (3)\nVálassz!: "))
-
-        if jatek_valasztas == 1:
-            print("Könnyű nehézség kiválasztva! ✅")
-            easy()
-
-        elif jatek_valasztas == 2:
-            print("Közepes nehézség kiválasztva! ✅")
-
-
-        elif jatek_valasztas == 3:
-            print("Nehéz nehézség kiválasztva! ✅")
-
-        else:
-            print("Helytelen formátum! ❌")
+        try:
+            jatek_valasztas = int(input("Válassz szintet!\nKönnyű (1)\nKözepes (2)\nNehéz (3)\nVálassz!: "))
+            if jatek_valasztas == 1:
+                print("Könnyű nehézség kiválasztva! ✅")
+                easy()
+                break  # End after the game is finished
+            elif jatek_valasztas == 2:
+                print("Közepes nehézség kiválasztva! ✅")
+                # Add medium difficulty logic here
+            elif jatek_valasztas == 3:
+                print("Nehéz nehézség kiválasztva! ✅")
+                # Add hard difficulty logic here
+            else:
+                print("Helytelen formátum! ❌")
+        except ValueError:
+            print("Kérlek, számot adj meg! ❌")
 
 
 kezdes()
