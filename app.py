@@ -84,14 +84,14 @@ def hard():
     elet = 5
     global ismeretlen
 
-    print(fovaros)
-    print(f"Az ország hossza: {fovaros_len} karakter.")
+    print(orszag)
+    print(f"Az ország hossza: {orszag_len} karakter.")
     print(f"A kitalálandó ország: \n{ismeretlen}")
 
     while elet > 0:
         tipp = input("Adj meg egy betűt, vagy megoldást: ").strip()
 
-        if tipp.lower() == fovaros.lower():
+        if tipp.lower() == orszag.lower():
             print("Gratulálok, kitaláltad az országot! 🎉")
             break
 
@@ -107,14 +107,14 @@ def hard():
                 print("Játék folytatása...")
                 continue
 
-        elif tipp.lower() in fovaros.lower():
+        elif tipp.lower() in orszag.lower():
             jo_tippek.append(tipp.lower())
             print(f"Helyes válasz! ✅\n> Rossz válaszok: {rossz_tippek} \n> Jó válaszok: {jo_tippek}")
 
             uj_ismeretlen = ""
-            for i in range(len(fovaros)):
-                if fovaros[i].lower() == tipp.lower():
-                    uj_ismeretlen += fovaros[i] + " "
+            for i in range(len(orszag)):
+                if orszag[i].lower() == tipp.lower():
+                    uj_ismeretlen += orszag[i] + " "
                 else:
                     uj_ismeretlen += ismeretlen[i * 2] + " "
             ismeretlen = uj_ismeretlen
@@ -131,7 +131,7 @@ def hard():
             print("Megmaradt életed:", elet, " 💔")
 
             if elet == 0:
-                print(f"Vesztettél! Az ország vagy főváros: {fovaros}")
+                print(f"Vesztettél! Az ország: {orszag}")
 
 def kezdes():
     while True:
