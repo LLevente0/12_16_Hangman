@@ -1,5 +1,8 @@
 from country_list import get_countries
 import random
+from ascii import HANGMANPICS
+
+
 
 countries = get_countries()
 
@@ -21,13 +24,14 @@ rossz_tippek = []
 
 
 def easy():
-    life = 7
+    elet = 7
     global ismeretlen
 
+    print(orszag)
     print(f"Az ország hossza: {orszag_len} karakter.")
     print(f"A kitalálandó ország: \n{ismeretlen}")
 
-    while life > 0:
+    while elet > 0:
         tipp = input("Adj meg egy betűt, vagy megoldást: ").strip()
 
         if tipp.lower() == orszag.lower():
@@ -50,13 +54,13 @@ def easy():
             jo_tippek.append(tipp.lower())
             print(f"Helyes válasz! ✅\n> Rossz válaszok: {rossz_tippek} \n> Jó válaszok: {jo_tippek}")
 
-            new_ismeretlen = ""
+            uj_ismeretlen = ""
             for i in range(len(orszag)):
                 if orszag[i].lower() == tipp.lower():
-                    new_ismeretlen += orszag[i] + " "
+                    uj_ismeretlen += orszag[i] + " "
                 else:
-                    new_ismeretlen += ismeretlen[i * 2] + " "
-            ismeretlen = new_ismeretlen
+                    uj_ismeretlen += ismeretlen[i * 2] + " "
+            ismeretlen = uj_ismeretlen
             print(ismeretlen)
 
             if "_" not in ismeretlen:
@@ -65,11 +69,11 @@ def easy():
 
         else:
             rossz_tippek.append(tipp.lower())
-            life -= 1
+            elet -= 1
             print(f"Helytelen válasz! ❌\n> Rossz válaszok: {rossz_tippek}\n> Jó válaszok: {jo_tippek}")
-            print("Megmaradt életed:", life, " 💔")
+            print("Megmaradt életed:", elet, " 💔")
 
-            if life == 0:
+            if elet == 0:
                 print(f"Vesztettél! Az ország: {orszag}")
 
 
@@ -80,13 +84,11 @@ def kezdes():
             if jatek_valasztas == 1:
                 print("Könnyű nehézség kiválasztva! ✅")
                 easy()
-                break  # End after the game is finished
+                break
             elif jatek_valasztas == 2:
                 print("Közepes nehézség kiválasztva! ✅")
-                # Add medium difficulty logic here
             elif jatek_valasztas == 3:
                 print("Nehéz nehézség kiválasztva! ✅")
-                # Add hard difficulty logic here
             else:
                 print("Helytelen formátum! ❌")
         except ValueError:
