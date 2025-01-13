@@ -88,7 +88,7 @@ def hard():
         tipp = input("Adj meg egy betűt, vagy megoldást: ").strip()
 
         if tipp.lower() == orszag.lower():
-            print("Gratulálok, nyertél! 🏆")
+            print("Gratulálok, kitaláltad az országot! 🎉")
             break
 
         elif tipp.lower() in jo_tippek or tipp.lower() in rossz_tippek:
@@ -142,6 +142,7 @@ def kezdes():
             elif jatek_valasztas == 3:
                 print("Nehéz nehézség kiválasztva! ✅")
                 hard()
+                break
             else:
                 print("Helytelen formátum! ❌")
         except ValueError:
