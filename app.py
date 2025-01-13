@@ -79,7 +79,6 @@ def easy():
             if elet == 0:
                 print(f"Vesztettél! Az ország: {orszag}")
 
-
 def hard():
     elet = 5
     global ismeretlen
